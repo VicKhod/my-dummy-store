@@ -3,10 +3,12 @@ import styles from './TemplateName.module.scss';
 
 interface TemplateNameProps {}
 
-const TemplateName = ({}: TemplateNameProps) => (
-  <div className={styles.templateName}>
-    TemplateName
-  </div>
-);
+const TemplateName = ({}: TemplateNameProps) => {
+  return (
+    <div className={styles.templateName}>
+      TemplateName
+    </div>
+  )
+};
 
 export default TemplateName;
