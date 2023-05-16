@@ -6,18 +6,15 @@ interface LoginPageProps {}
 const LoginPage = ({}: LoginPageProps) => {
   const navigate = useNavigate();
   const location = useLocation();
-
   const fromPage = location.state?.from?.pathname || '/';
-
-  // const handleLogin = () => {
-  //   navigate(fromPage, {replace: true});
-  //    // navigate('/home', {replace: true});
-  // }
   
   return (
     <div className={styles.loginPage}>
-      LoginPage
-      {fromPage}
+      <form>
+        <input type="text" placeholder="Username" />
+        <input type="password" placeholder="Password" />
+      </form>
+      <button onClick={() => navigate(fromPage, {replace: true})}>Login</button>
     </div>
   )
 };
