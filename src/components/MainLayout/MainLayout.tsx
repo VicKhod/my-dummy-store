@@ -9,7 +9,9 @@ interface MainLayoutProps {}
 const MainLayout = ({}: MainLayoutProps) => (
   <div className={styles.mainLayout}>
     <Header/>
-    <Outlet/>
+    <div className={styles.content}>
+      <Outlet/>
+    </div>
   </div>
 );
 

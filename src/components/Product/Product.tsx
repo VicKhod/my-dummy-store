@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./Product.module.scss";
 import { useGetProductQuery } from "../../services/api";
+import { useParams } from "react-router-dom";
 
 export interface IProduct {
   id: number;
@@ -16,10 +17,23 @@ export interface IProduct {
   images: [string];
 }
 
-const Product = () => {
-  const product = useGetProductQuery();
+const Product: React.FC<{product: IProduct}> = ({product}) => {
+  const productImg = {
+    backgroundImage: `url(${product.images[0]})`,
+    backgroundSize: "contain",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    backgroundColor: "#fff",
+    marginBottom: "20px"
+};
 
-  return <div className={styles.product}>Product</div>;
+  return (
+    <div className={styles.productWrapper}>
+      <div className={styles.productImg} style={productImg}></div>
+      <div className={styles.productTitle}>{product.title}</div>
+      <div className={styles.productPrice}>{product.price}</div>
+    </div>
+  );
 };
 
 export default Product;

@@ -1,1 +1,17 @@
-.product {}
+.productWrapper {
+  width: 48%;
+  background-color: beige;
+  border-radius: 5%;
+  box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+}
+.productImg {
+  height: 120px;
+  background-color: lightgray;
+}
+.productTitle{
+
+}
+.productPrice {
+  font-weight: bold;
+  font-size: 1.2em;
+}
