@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { ILoginRequest, IUser } from "./userSlice";
+import { IUser } from "./userSlice";
 import { API } from "../../services/api";
 import { AxiosError } from "axios";
 
@@ -28,8 +28,8 @@ export interface IAuthSlice {
 
 const initialState: IAuthSlice = {
   user: {
-    username: "Lol",
-    token: "Kekovich",
+    username: "No name",
+    token: "No token",
   },
   isAuth: false,
 };

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../components/hooks/store";
 import { useAppSelector } from "../../store";
 import { getAccess } from "../../store/slices/authSlice";
+import setLogin from "../../store/slices/userSlice";
 
 interface LoginPageProps {}
 
@@ -13,16 +14,15 @@ const LoginPage = ({}: LoginPageProps) => {
   const navigate = useNavigate();
   const [usernameVal, setUsernameVal] = useState("");
   const [passwordVal, setPasswordVal] = useState("");
-  const data: [string, string] = [usernameVal, passwordVal]
+  const data: [string, string] = [usernameVal, passwordVal];
 
   const handler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(usernameVal, passwordVal);
-    dispatch(getAccess(data));
-    console.log(data);
-  }
-  const clickHandler = () => {
-   if (isAuth) navigate('/profile')
+    dispatch(getAccess(data)).then((res) => {
+      const data = res.payload;
+      // dispatch(setLogin(data));
+      navigate("/profile");
+    });
   };
 
   return (
@@ -45,7 +45,7 @@ const LoginPage = ({}: LoginPageProps) => {
           required
           onInput={(e) => setPasswordVal(e.currentTarget.value)}
         />
-        <button type="submit" onClick={clickHandler}>Войти</button>
+        <button type="submit">Войти</button>
       </form>
     </div>
   );
