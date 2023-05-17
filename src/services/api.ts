@@ -1,4 +1,7 @@
+
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { TypeRootState } from '../store';
+import { LoginRequest, UserResponse } from '../store/slices/userSlice';
 
 export const API = createApi({
   reducerPath: 'API',
@@ -7,31 +10,40 @@ export const API = createApi({
   endpoints: (build) => ({
     getProducts: build.query({
       query: () => '/products',
-      // providesTags: (result) => result
-      // ? [...result.map(({ id }) => ({ type: 'Products', id })),] 
-      //   : [{ type: 'Products' , id: 'LIST' }]
     }),
     getProduct: build.query({
       query: (id: string) => `/products/${id}`,
     }),
     searchProducts: build.query({ 
       query: (search: string) => `/products/search?q=${search}`,
-    }),
-    loginUser: build.mutation({
-      query: (credentials) => ({
-        url: '/auth/login',
-        method: 'POST',
-        body: credentials({
-          username: '',
-          password: '',
-        }),
-      }),
-      // invalidatesTags: [type: 'Products', id: 'LIST'],
-      transformResponse: (response: any, meta, arg) => response.data,
-      transformErrorResponse: (response: {status: string | number}, meta, arg) => response.status
     })
   })
-  
 });
 
-export const { useGetProductsQuery, useGetProductQuery, useSearchProductsQuery, useLoginUserMutation } = API
+export const authAPI = createApi({
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'https://dummyjson.com/auth',
+    prepareHeaders: (headers, { getState }) => {
+      const token = (getState() as TypeRootState).auth.token
+      if (token) {
+        headers.set('authorization', `Bearer ${token}`)
+      }
+      return headers
+    },
+  }),
+  endpoints: (builder) => ({
+    login: builder.mutation<UserResponse, LoginRequest>({
+      query: ({ username, password }) => ({
+        url: '/login',
+        method: 'POST',
+        body: JSON.stringify({ username, password }),
+      }),
+    }),
+    protected: builder.mutation<{ message: string }, void>({
+      query: () => 'protected',
+    }),
+  }),
+})
+
+export const { useGetProductsQuery, useGetProductQuery, useSearchProductsQuery } = API
+export const { useLoginMutation, useProtectedMutation } = authAPI
