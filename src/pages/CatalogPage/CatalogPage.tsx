@@ -1,24 +1,25 @@
-import React from 'react';
-import styles from './CatalogPage.module.scss';
-import { useGetProductsQuery } from '../../services/api';
-import Product from '../../components/Product/Product';
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import styles from "./CatalogPage.module.scss";
+import Product from "../../components/Product/Product";
 
 interface CatalogPageProps {}
 
 const CatalogPage = ({}: CatalogPageProps) => {
-  const { data = [], isLoading } = useGetProductsQuery([]);
-  if (isLoading) return <div>Loading...</div>;
+  const navigate = useNavigate();
 
   return (
     <div className={styles.catalogPage}>
       <div>
-        {Object.keys(data.products).map((key, index) => {
+        {/* {Object.keys(data.products).map((key, index) => {
           return (
             <div className={styles.catalogPage__item} key={index}>
-              <Product product={data.products[key]}/>
+              <Link to={`/product/${key}`} key={key}>
+                <Product product={data.products[key]} /> 
+              </Link>
             </div>
           );
-        })}
+        })} */}
       </div>
     </div>
   );

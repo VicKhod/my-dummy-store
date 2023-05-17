@@ -1,81 +1,52 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import styles from "./LoginPage.module.scss";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../components/hooks/store";
-import React from "react";
-import { LoginRequest } from "../../store/slices/userSlice";
-import { useLoginMutation } from "../../services/api";
-import { setLogin } from "../../store/slices/authSlice";
-import { isRejectedWithValue } from "@reduxjs/toolkit";
+import { useAppSelector } from "../../store";
+import { getAccess } from "../../store/slices/authSlice";
 
-interface LoginPageProps {
-  onSubmit: (data: LoginRequest) => void;
-}
+interface LoginPageProps {}
 
-type FormFields = {
-  username: HTMLInputElement;
-  password: HTMLInputElement;
-};
-
-const LoginPage = ({ onSubmit }: LoginPageProps) => {
+const LoginPage = ({}: LoginPageProps) => {
   const dispatch = useAppDispatch();
+  const isAuth = useAppSelector((state) => state.auth.isAuth);
   const navigate = useNavigate();
-  const location = useLocation();
-  const fromPage = location.state?.from?.pathname || "/";
-  const [login] = useLoginMutation();
-  const [formState, setFormState] = React.useState<LoginRequest>({
-    username: "",
-    password: "",
-  });
+  const [usernameVal, setUsernameVal] = useState("");
+  const [passwordVal, setPasswordVal] = useState("");
+  const data: [string, string] = [usernameVal, passwordVal]
 
-  const handleSubmit: React.FormEventHandler<HTMLFormElement & FormFields> = (
-    event
-  ) => {
-    event.preventDefault();
-    const form = event.currentTarget;
-    const { username, password } = form;
-    onSubmit({
-      username: username.value,
-      password: password.value,
-    });
-    setFormState(
-      { username: username.value, password: password.value }
-    );
-    console.log(formState)
-    dispatch(setLogin(formState));
+  const handler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(usernameVal, passwordVal);
+    dispatch(getAccess(data));
+    console.log(data);
+  }
+  const clickHandler = () => {
+   if (isAuth) navigate('/profile')
   };
 
   return (
     <div className={styles.loginPage}>
-      <form onSubmit={handleSubmit}>
-        <label>
-          <span>Username</span>
-          <input name="username" type="text" placeholder="Username" required />
-        </label>
-        <label>
-          <span>Password</span>
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            required
-          />
-        </label>
+      <form className="auth" onSubmit={handler}>
+        <h1>Войти</h1>
+        <input
+          type="username"
+          placeholder="username"
+          name="username"
+          value={usernameVal}
+          required
+          onInput={(e) => setUsernameVal(e.currentTarget.value)}
+        />
+        <input
+          type="password"
+          placeholder="password"
+          name="password"
+          value={passwordVal}
+          required
+          onInput={(e) => setPasswordVal(e.currentTarget.value)}
+        />
+        <button type="submit" onClick={clickHandler}>Войти</button>
       </form>
-      <button
-        onClick={async () => {
-          try {
-            const user = await login(formState).unwrap();
-            dispatch(setLogin(user));
-            navigate(fromPage, { replace: true });
-          } catch (error: any) {
-            if (isRejectedWithValue(error)) {
-              console.log(error.data);
-            }
-          }
-        }}
-      >
-        Login
-      </button>
     </div>
   );
 };
