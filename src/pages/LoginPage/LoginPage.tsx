@@ -10,33 +10,29 @@ import React, {
 import { LoginRequest } from "../../store/slices/userSlice";
 import { useLoginMutation } from "../../services/api";
 import { setLogin } from "../../store/slices/authSlice";
-import { isRejectedWithValue } from "@reduxjs/toolkit";
 
-interface LoginPageProps {
-  onSubmit: (data: LoginRequest) => void;
-}
-
-type FormFields = {
-  username: HTMLInputElement;
-  password: HTMLInputElement;
-};
-
-const LoginPage = ({ onSubmit }: LoginPageProps) => {
+const LoginPage = () => {
   const dispatch = useAppDispatch();
-  const [login] = useLoginMutation();
   const [usernameVal, setUsernameVal] = useState<string>();
   const [passwordVal, setPasswordVal] = useState<string>();
+  const formData: LoginRequest = {
+    username: usernameVal,
+    password: passwordVal,
+  };
+  const [login, reset] = useLoginMutation();
 
   const handleSubmit: FormEventHandler = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     event.preventDefault();
-    const formData: LoginRequest = {
-      username: usernameVal,
-      password: passwordVal,
-    };
     console.log(formData);
-    
+    console.log(login);
+    dispatch(setLogin);
+    login(formData)
+      .unwrap()
+      .then((fulfilled) => console.log(fulfilled))
+      .catch((rejected) => console.error(rejected));
+    // dispatch(setLogin.util.reset);
   };
 
   return (
