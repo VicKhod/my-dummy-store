@@ -11,6 +11,6 @@ export interface UserResponse {
 }
 
 export interface LoginRequest {
-  username: string
-  password: string
+  username: string | undefined
+  password: string | undefined
 }

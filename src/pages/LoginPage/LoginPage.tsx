@@ -1,7 +1,12 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./LoginPage.module.scss";
 import { useAppDispatch } from "../../components/hooks/store";
-import React from "react";
+import React, {
+  FormEventHandler,
+  HTMLInputTypeAttribute,
+  useEffect,
+  useState,
+} from "react";
 import { LoginRequest } from "../../store/slices/userSlice";
 import { useLoginMutation } from "../../services/api";
 import { setLogin } from "../../store/slices/authSlice";
@@ -18,38 +23,34 @@ type FormFields = {
 
 const LoginPage = ({ onSubmit }: LoginPageProps) => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const fromPage = location.state?.from?.pathname || "/";
   const [login] = useLoginMutation();
-  const [formState, setFormState] = React.useState<LoginRequest>({
-    username: "",
-    password: "",
-  });
+  const [usernameVal, setUsernameVal] = useState<string>();
+  const [passwordVal, setPasswordVal] = useState<string>();
 
-  const handleSubmit: React.FormEventHandler<HTMLFormElement & FormFields> = (
-    event
+  const handleSubmit: FormEventHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
     event.preventDefault();
-    const form = event.currentTarget;
-    const { username, password } = form;
-    onSubmit({
-      username: username.value,
-      password: password.value,
-    });
-    setFormState(
-      { username: username.value, password: password.value }
-    );
-    console.log(formState)
-    dispatch(setLogin(formState));
+    const formData: LoginRequest = {
+      username: usernameVal,
+      password: passwordVal,
+    };
+    console.log(formData);
+    
   };
 
   return (
     <div className={styles.loginPage}>
-      <form onSubmit={handleSubmit}>
+      <form id="form" onSubmit={handleSubmit}>
         <label>
           <span>Username</span>
-          <input name="username" type="text" placeholder="Username" required />
+          <input
+            name="username"
+            type="text"
+            placeholder="Username"
+            ref={(input) => setUsernameVal(input?.value)}
+            required
+          />
         </label>
         <label>
           <span>Password</span>
@@ -57,25 +58,12 @@ const LoginPage = ({ onSubmit }: LoginPageProps) => {
             name="password"
             type="password"
             placeholder="Password"
+            ref={(input) => setPasswordVal(input?.value)}
             required
           />
         </label>
       </form>
-      <button
-        onClick={async () => {
-          try {
-            const user = await login(formState).unwrap();
-            dispatch(setLogin(user));
-            navigate(fromPage, { replace: true });
-          } catch (error: any) {
-            if (isRejectedWithValue(error)) {
-              console.log(error.data);
-            }
-          }
-        }}
-      >
-        Login
-      </button>
+      <button onClick={handleSubmit}>Login</button>
     </div>
   );
 };
