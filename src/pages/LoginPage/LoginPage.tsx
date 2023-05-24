@@ -2,51 +2,57 @@ import React, { useState } from "react";
 import styles from "./LoginPage.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../components/hooks/store";
-import { useAppSelector } from "../../store";
-import { getAccess } from "../../store/slices/authSlice";
+import React, { FormEventHandler, useState } from "react";
+import { LoginRequest } from "../../store/slices/userSlice";
+import { useLoginMutation } from "../../services/api";
+import { setLogin } from "../../store/slices/authSlice";
 
-interface LoginPageProps {}
-
-const LoginPage = ({}: LoginPageProps) => {
+const LoginPage = () => {
   const dispatch = useAppDispatch();
-  const isAuth = useAppSelector((state) => state.auth.isAuth);
-  const navigate = useNavigate();
-  const [usernameVal, setUsernameVal] = useState("");
-  const [passwordVal, setPasswordVal] = useState("");
-  const data: [string, string] = [usernameVal, passwordVal]
+  const [usernameVal, setUsernameVal] = useState<string>();
+  const [passwordVal, setPasswordVal] = useState<string>();
+  const formData: LoginRequest = {
+    username: usernameVal,
+    password: passwordVal,
+  };
+  const [login] = useLoginMutation();
 
-  const handler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(usernameVal, passwordVal);
-    dispatch(getAccess(data));
-    console.log(data);
-  }
-  const clickHandler = () => {
-   if (isAuth) navigate('/profile')
+  const handleSubmit: FormEventHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    event.preventDefault();
+    console.log(formData);
+    login(formData)
+      .unwrap()
+      .then((fulfilled) => dispatch(setLogin(fulfilled)))
+      .catch((rejected) => console.error(rejected));
   };
 
   return (
     <div className={styles.loginPage}>
-      <form className="auth" onSubmit={handler}>
-        <h1>Войти</h1>
-        <input
-          type="username"
-          placeholder="username"
-          name="username"
-          value={usernameVal}
-          required
-          onInput={(e) => setUsernameVal(e.currentTarget.value)}
-        />
-        <input
-          type="password"
-          placeholder="password"
-          name="password"
-          value={passwordVal}
-          required
-          onInput={(e) => setPasswordVal(e.currentTarget.value)}
-        />
-        <button type="submit" onClick={clickHandler}>Войти</button>
+      <form id="form" onSubmit={handleSubmit}>
+        <label>
+          <span>Username</span>
+          <input
+            name="username"
+            type="text"
+            placeholder="Username"
+            ref={(input) => setUsernameVal(input?.value)}
+            required
+          />
+        </label>
+        <label>
+          <span>Password</span>
+          <input
+            name="password"
+            type="password"
+            placeholder="Password"
+            ref={(input) => setPasswordVal(input?.value)}
+            required
+          />
+        </label>
       </form>
+      <button onClick={handleSubmit}>Login</button>
     </div>
   );
 };
