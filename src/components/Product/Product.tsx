@@ -1,21 +1,5 @@
-import { useEffect, useState } from "react";
 import styles from "./Product.module.scss";
-import { useGetProductQuery } from "../../services/api";
-import { useParams } from "react-router-dom";
-
-export interface IProduct {
-  id: number;
-  title: string;
-  description: string;
-  price: number;
-  discountPercentage: number;
-  rating: number;
-  stock: number;
-  brand: string;
-  category: string;
-  thumbnail: string;
-  images: [string];
-}
+import { IProduct } from "../../store/slices/productSlice";
 
 const Product: React.FC<{product: IProduct}> = ({product}) => {
   const productImg = {
