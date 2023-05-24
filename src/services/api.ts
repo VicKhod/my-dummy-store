@@ -29,11 +29,8 @@ export const API = createApi({
       query: ({ username, password }) => ({
         url: "/auth/login",
         method: "POST",
-        body: JSON.stringify({ username, password }),
+        body: ({ username, password })
       }),
-    }),
-    protected: build.mutation<{ message: string }, void>({
-      query: () => "protected",
     }),
   }),
 });
@@ -43,5 +40,4 @@ export const {
   useGetProductQuery,
   useSearchProductsQuery,
   useLoginMutation,
-  useProtectedMutation,
 } = API;
