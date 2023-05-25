@@ -1,4 +1,4 @@
-import React, { useState, FormEventHandler } from "react";
+import React, { useState, FormEventHandler, useEffect, useRef } from "react";
 import styles from "./LoginPage.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../components/hooks/store";
@@ -10,9 +10,16 @@ const LoginPage = () => {
   const dispatch = useAppDispatch();
   const [usernameVal, setUsernameVal] = useState<string>();
   const [passwordVal, setPasswordVal] = useState<string>();
+
+  const usernameRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  // const formData: ILoginRequest = {
+  //   username: usernameVal,
+  //   password: passwordVal,
+  // };
   const formData: ILoginRequest = {
-    username: usernameVal,
-    password: passwordVal,
+    username: usernameRef.current?.value,
+    password: passwordRef.current?.value,
   };
   const [login] = useLoginMutation();
 
@@ -21,11 +28,19 @@ const LoginPage = () => {
   ) => {
     event.preventDefault();
     console.log(formData);
-    login(formData)
-      .unwrap()
-      .then((fulfilled) => dispatch(setLogin(fulfilled)))
-      .catch((rejected) => console.error(rejected));
+    if (
+      (usernameVal !== "") && (usernameVal !== undefined) ||
+      (passwordVal !== "") && (passwordVal !== undefined)
+    )
+      login(formData)
+        .unwrap()
+        .then((fulfilled) => dispatch(setLogin(fulfilled)))
+        .catch((rejected) => console.error(rejected));
   };
+
+  // useEffect(() => {
+
+  // }, []);
 
   return (
     <div className={styles.loginPage}>
@@ -36,7 +51,8 @@ const LoginPage = () => {
             name="username"
             type="text"
             placeholder="Username"
-            ref={(input) => setUsernameVal(input?.value)}
+            // ref={(input) => setUsernameVal(input?.value)}
+            ref={usernameRef}
             required
           />
         </label>
@@ -46,7 +62,8 @@ const LoginPage = () => {
             name="password"
             type="password"
             placeholder="Password"
-            ref={(input) => setPasswordVal(input?.value)}
+            // ref={(input) => setPasswordVal(input?.value)}
+            ref={passwordRef}
             required
           />
         </label>
