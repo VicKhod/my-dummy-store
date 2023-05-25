@@ -1,24 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { ILoginRequest, IUser } from "./userSlice";
-import { API } from "../../services/api";
-import { AxiosError } from "axios";
-
-export const getAccess = createAsyncThunk(
-  "auth/getAccess",
-  async (data: string[], { rejectWithValue }) => {
-    const [username, password] = data
-    try {
-      const res = await API.post(`/auth/login`, { username, password });
-      return res.data;
-    } catch (error) {
-      const err = error as AxiosError;
-      if (!err.response) {
-        throw err;
-      }
-      return rejectWithValue(err.response?.data);
-    }
-  }
-);
+import { createSlice } from "@reduxjs/toolkit";
+import { IUser } from "./userSlice";
 
 export interface IAuthSlice {
   user: IUser;
@@ -28,8 +9,8 @@ export interface IAuthSlice {
 
 const initialState: IAuthSlice = {
   user: {
-    username: "Lol",
-    token: "Kekovich",
+    username: "",
+    token: "",
   },
   isAuth: false,
 };
@@ -37,18 +18,20 @@ const initialState: IAuthSlice = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(getAccess.pending, (state) => {
-        state.pending = true;
-      })
-      .addCase(getAccess.fulfilled, (state, action) => {
-        state.user = action.payload.user;
-        state.isAuth = true;
-        state.pending = false;
-      });
+  reducers: {
+    setlogin: (state, action) => {
+      state.isAuth = true;
+      state.user = action.payload;
+    },
+    setlogout: (state) => {
+      state.isAuth = false;
+      state.user = {
+        username: "",
+        token: "",
+      };
+    },
   },
 });
 
+export const { setlogin, setlogout } = authSlice.actions;
 export default authSlice.reducer;

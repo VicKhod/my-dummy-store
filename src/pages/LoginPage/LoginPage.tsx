@@ -1,17 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, FormEventHandler } from "react";
 import styles from "./LoginPage.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../components/hooks/store";
-import React, { FormEventHandler, useState } from "react";
-import { LoginRequest } from "../../store/slices/userSlice";
+import { ILoginRequest } from "../../store/slices/userSlice";
 import { useLoginMutation } from "../../services/api";
-import { setLogin } from "../../store/slices/authSlice";
+import setLogin from "../../store/slices/authSlice";
 
 const LoginPage = () => {
   const dispatch = useAppDispatch();
   const [usernameVal, setUsernameVal] = useState<string>();
   const [passwordVal, setPasswordVal] = useState<string>();
-  const formData: LoginRequest = {
+  const formData: ILoginRequest = {
     username: usernameVal,
     password: passwordVal,
   };

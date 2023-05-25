@@ -1,4 +1,4 @@
-export interface User {
+export interface IUser {
   id?: number
   username: string
   email?: string
@@ -9,12 +9,12 @@ export interface User {
   token: string
 }
 
-export interface UserResponse {
-  user: User
+export interface IUserResponse {
+  user: IUser
   token: string
 }
 
-export interface LoginRequest {
+export interface ILoginRequest {
   username: string | undefined
   password: string | undefined
 }

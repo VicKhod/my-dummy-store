@@ -1,17 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { TypeRootState } from "../store";
-import { LoginRequest, UserResponse } from "../store/slices/userSlice";
+import { ILoginRequest, IUserResponse } from "../store/slices/userSlice";
 
 export const API = createApi({
   reducerPath: "API",
   tagTypes: ["Products"],
   baseQuery: fetchBaseQuery({
     baseUrl: "https://dummyjson.com",
-    prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as TypeRootState).auth.token;
-      if (token) {
-        headers.set("authorization", `Bearer ${token}`);
-      }
+    prepareHeaders: (headers) => {
+      headers.set('Content-Type', 'application/json')
       return headers;
     },
   }),
@@ -25,7 +21,7 @@ export const API = createApi({
     searchProducts: build.query({
       query: (search: string) => `/products/search?q=${search}`,
     }),
-    login: build.mutation<UserResponse, LoginRequest>({
+    login: build.mutation<IUserResponse, ILoginRequest>({
       query: ({ username, password }) => ({
         url: "/auth/login",
         method: "POST",
