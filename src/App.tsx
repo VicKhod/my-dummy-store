@@ -2,7 +2,7 @@ import './App.css';
 import { Route, Routes } from 'react-router';
 import MainLayout from './components/MainLayout/MainLayout';
 import HomePage from './pages/HomePage/HomePage';
-// import CatalogPage from './pages/CatalogPage/CatalogPage';
+import CatalogPage from './pages/CatalogPage/CatalogPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import Auth from './hoc/Auth';
 

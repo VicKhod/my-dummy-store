@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../components/hooks/store";
 import { ILoginRequest } from "../../store/slices/userSlice";
 import { useLoginMutation } from "../../services/api";
-import setLogin from "../../store/slices/authSlice";
+import { setLogin } from "../../store/slices/authSlice";
 
 const LoginPage = () => {
   const dispatch = useAppDispatch();

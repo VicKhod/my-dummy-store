@@ -1,7 +1,3 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
-// const
-
 export interface IProduct {
   id: number;
   title: string;
@@ -15,5 +11,3 @@ export interface IProduct {
   thumbnail: string;
   images: string[];
 }
-
-// const productSlice = createSlice({});
