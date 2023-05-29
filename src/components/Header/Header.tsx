@@ -11,7 +11,7 @@ const Header = ({}: HeaderProps) => (
         <Link to='/catalog'>Каталог</Link>
         <Link to='/'>Поиск</Link>
         <Link to='/'>Корзина</Link>
-        <Link to='/'>Личный кабинет</Link>
+        <Link to='/user'>Личный кабинет</Link>
       </nav>
 
     </header>

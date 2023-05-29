@@ -1,15 +1,20 @@
-import React from 'react';
-import { useLocation, Navigate } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useLocation, Navigate } from "react-router-dom";
+import { useAppSelector } from "../hooks";
 
-const Auth: React.FC<{children: any}> = ({children}) => {
+const Auth: React.FC<{ children: any }> = ({ children }) => {
+  const isAuth = useAppSelector((state) => state.auth.isAuth);
   const location = useLocation();
-  const auth = false;
 
   return (
-    auth ? children :
-    <Navigate to="/login" state={{ from: location }} replace />
+    <div>
+      {isAuth ? (
+        children
+      ) : (
+        <Navigate to="/login" state={{ from: location }} replace />
+      )}
+    </div>
   );
-
-}
+};
 
 export default Auth;

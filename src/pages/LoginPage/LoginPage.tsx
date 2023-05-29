@@ -1,8 +1,7 @@
-import React, { useState, FormEventHandler, useEffect, useRef } from "react";
+import React, { useState, FormEventHandler } from "react";
 import styles from "./LoginPage.module.scss";
-import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../components/hooks/store";
-import { ILoginRequest } from "../../store/slices/userSlice";
+import { useAppDispatch } from "../../hooks";
+import { ILoginRequest, IUser } from "../../store/slices/userSlice";
 import { useLoginMutation } from "../../services/api";
 import { setLogin } from "../../store/slices/authSlice";
 
@@ -10,16 +9,9 @@ const LoginPage = () => {
   const dispatch = useAppDispatch();
   const [usernameVal, setUsernameVal] = useState<string>();
   const [passwordVal, setPasswordVal] = useState<string>();
-
-  const usernameRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
-  // const formData: ILoginRequest = {
-  //   username: usernameVal,
-  //   password: passwordVal,
-  // };
   const formData: ILoginRequest = {
-    username: usernameRef.current?.value,
-    password: passwordRef.current?.value,
+    username: usernameVal,
+    password: passwordVal,
   };
   const [login] = useLoginMutation();
 
@@ -28,19 +20,14 @@ const LoginPage = () => {
   ) => {
     event.preventDefault();
     console.log(formData);
-    if (
-      (usernameVal !== "") && (usernameVal !== undefined) ||
-      (passwordVal !== "") && (passwordVal !== undefined)
-    )
-      login(formData)
-        .unwrap()
-        .then((fulfilled) => dispatch(setLogin(fulfilled)))
-        .catch((rejected) => console.error(rejected));
+    login(formData)
+      .unwrap()
+      .then((fulfilled: IUser) => {
+        console.log(fulfilled);
+        dispatch(setLogin(fulfilled));
+      })
+      .catch((rejected) => console.error(rejected));
   };
-
-  // useEffect(() => {
-
-  // }, []);
 
   return (
     <div className={styles.loginPage}>
@@ -51,8 +38,7 @@ const LoginPage = () => {
             name="username"
             type="text"
             placeholder="Username"
-            // ref={(input) => setUsernameVal(input?.value)}
-            ref={usernameRef}
+            ref={(input) => setUsernameVal(input?.value)}
             required
           />
         </label>
@@ -62,8 +48,7 @@ const LoginPage = () => {
             name="password"
             type="password"
             placeholder="Password"
-            // ref={(input) => setPasswordVal(input?.value)}
-            ref={passwordRef}
+            ref={(input) => setPasswordVal(input?.value)}
             required
           />
         </label>
