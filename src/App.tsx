@@ -6,6 +6,7 @@ import CatalogPage from './pages/CatalogPage/CatalogPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import Auth from './hoc/Auth';
 import UserPage from './pages/UserPage/UserPage';
+import ProductPage from './pages/ProductPage/ProductPage';
 
 function App() {  
   
@@ -15,8 +16,9 @@ function App() {
       <Route path='/' element={<MainLayout />}>
         <Route path='login' element={<LoginPage />} />
         <Route index element={<Auth><HomePage /></Auth>} />
-        <Route path='catalog' element={<CatalogPage  />} />
-        <Route path='user' element={<UserPage  />} />
+        <Route path='catalog' element={<CatalogPage />} />
+        <Route path='user' element={<UserPage />} />
+        <Route path='/product/:id' element={<ProductPage />} />
       </Route>
     </Routes>
   );

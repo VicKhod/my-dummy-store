@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ILoginRequest, IUser } from "../store/slices/userSlice";
+import { IProduct } from "../store/slices/productSlice";
 
 export const API = createApi({
   reducerPath: "API",
@@ -7,7 +8,7 @@ export const API = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://dummyjson.com",
     prepareHeaders: (headers) => {
-      headers.set('Content-Type', 'application/json')
+      headers.set("Content-Type", "application/json");
       return headers;
     },
   }),
@@ -15,7 +16,7 @@ export const API = createApi({
     getProducts: build.query({
       query: () => "/products",
     }),
-    getProduct: build.query({
+    getProduct: build.query<IProduct, string>({
       query: (id: string) => `/products/${id}`,
     }),
     searchProducts: build.query({
@@ -25,7 +26,7 @@ export const API = createApi({
       query: ({ username, password }) => ({
         url: "/auth/login",
         method: "POST",
-        body: ({ username, password })
+        body: { username, password },
       }),
     }),
   }),

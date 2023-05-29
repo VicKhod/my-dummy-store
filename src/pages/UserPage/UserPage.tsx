@@ -13,7 +13,7 @@ const UserPage = ({}: UserPageProps) => {
   return (
     <div className={styles.userPage}>
       UserPage
-      <img src={user.image} width={100} height={100} />
+      <img src={user.image} width={100} height={100} alt="user-pic"/>
       <div>{user.username}</div>
       <div>{user.id}</div>
       <div>{user.gender}</div>
