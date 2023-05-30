@@ -13,7 +13,6 @@ const ProductPage = () => {
     key = +id + 1;
   };
   const { data, isLoading } = useGetProductQuery(String(key));
-  console.log(data?.images);
 
   return (
     <>
