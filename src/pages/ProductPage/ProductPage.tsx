@@ -20,6 +20,7 @@ const ProductPage = () => {
       {!isLoading && data !== undefined ? (
         <div className={styles.productPage}>
           ProductPage
+          <img src={data.images[0]} alt="product-pic"/>
           <h1>{data?.title || "Product"}</h1>
           <p>{data?.brand || "Product"}</p>
           <p>{data?.category || "Product"}</p>
