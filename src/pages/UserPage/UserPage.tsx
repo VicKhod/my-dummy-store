@@ -7,8 +7,6 @@ interface UserPageProps {}
 const UserPage = ({}: UserPageProps) => {
   const user = useAppSelector((state) => state.auth.user);
   const isAuth = useAppSelector((state) => state.auth.isAuth);
-  console.log(user);
-  console.log(isAuth);
 
   return (
     <div className={styles.userPage}>

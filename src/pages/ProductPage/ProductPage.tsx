@@ -7,8 +7,13 @@ import { useGetProductQuery } from "../../services/api";
 
 const ProductPage = () => {
   const { id } = useParams<string>();
-  const { data, isLoading } = useGetProductQuery(`${id}`);
-  console.log(data?.images)
+  let key
+  
+  if (id !== undefined) {
+    key = +id + 1;
+  };
+  const { data, isLoading } = useGetProductQuery(String(key));
+  console.log(data?.images);
 
   return (
     <>

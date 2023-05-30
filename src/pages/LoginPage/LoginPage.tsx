@@ -19,11 +19,9 @@ const LoginPage = () => {
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     event.preventDefault();
-    console.log(formData);
     login(formData)
       .unwrap()
       .then((fulfilled: IUser) => {
-        console.log(fulfilled);
         dispatch(setLogin(fulfilled));
       })
       .catch((rejected) => console.error(rejected));
