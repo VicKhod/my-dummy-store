@@ -4,9 +4,9 @@ import styles from "./CatalogPage.module.scss";
 import Product from "../../components/Product/Product";
 import { useGetProductsQuery } from "../../services/api";
 
-interface CatalogPageProps {}
+// interface CatalogPageProps {}
 
-const CatalogPage = ({}: CatalogPageProps) => {
+const CatalogPage = () => {
   const { data = [], isLoading } = useGetProductsQuery([]);
   if (isLoading) return <div>Loading...</div>;
 
