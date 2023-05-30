@@ -9,16 +9,22 @@ const UserPage = ({}: UserPageProps) => {
   const isAuth = useAppSelector((state) => state.auth.isAuth);
 
   return (
-    <div className={styles.userPage}>
-      UserPage
-      <img src={user.image} width={100} height={100} alt="user-pic"/>
-      <div>{user.username}</div>
-      <div>{user.id}</div>
-      <div>{user.gender}</div>
-      <div>{user.firstName}</div>
-      <div>{user.lastName}</div>
-      <div>{user.email}</div>
-    </div>
+    <>
+      {isAuth ? (
+        <div className={styles.userPage}>
+          UserPage
+          <img src={user.image} width={100} height={100} alt="user-pic" />
+          <div>{user.username}</div>
+          <div>{user.id}</div>
+          <div>{user.gender}</div>
+          <div>{user.firstName}</div>
+          <div>{user.lastName}</div>
+          <div>{user.email}</div>
+        </div>
+      ) : (
+        <div>Вы не авторизованы</div>
+      )}
+    </>
   );
 };
 

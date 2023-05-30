@@ -4,9 +4,11 @@ import { useAppDispatch } from "../../hooks";
 import { ILoginRequest, IUser } from "../../store/slices/userSlice";
 import { useLoginMutation } from "../../services/api";
 import { setLogin } from "../../store/slices/authSlice";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const [usernameVal, setUsernameVal] = useState<string>();
   const [passwordVal, setPasswordVal] = useState<string>();
   const formData: ILoginRequest = {
@@ -23,6 +25,7 @@ const LoginPage = () => {
       .unwrap()
       .then((fulfilled: IUser) => {
         dispatch(setLogin(fulfilled));
+        navigate('/user');
       })
       .catch((rejected) => console.error(rejected));
   };
