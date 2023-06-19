@@ -20,15 +20,15 @@ const ProductPage = () => {
         <div className={styles.productPage}>
           ProductPage
           <img src={data.images[0]} alt="product-pic"/>
-          <h1>{data?.title || "Product"}</h1>
-          <p>{data?.brand || "Product"}</p>
-          <p>{data?.category || "Product"}</p>
-          <p>{data?.description || "Product"}</p>
-          <p>{data?.discountPercentage || "Product"}</p>
-          <p>{data?.price || "Product"}</p>
-          <p>{data?.rating || "Product"}</p>
-          <p>{data?.stock || "Product"}</p>
-          <p>{data?.thumbnail || "Product"}</p>
+          <h1>{data?.title || "product-title"}</h1>
+          <p>{data?.brand || "product-brand"}</p>
+          <p>{data?.category || "product-category"}</p>
+          <p>{data?.description || "product-description"}</p>
+          <p>{data?.discountPercentage || "product-discount-percentage"}</p>
+          <p>{data?.price || "product-price"}</p>
+          <p>{data?.rating || "product-rating"}</p>
+          <p>{data?.stock || "product-stock"}</p>
+          <p>{data?.thumbnail || "product-thumbnail"}</p>
         </div>
       ) : (
         <div>Loading...</div>

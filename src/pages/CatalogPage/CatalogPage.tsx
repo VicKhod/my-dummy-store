@@ -2,12 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./CatalogPage.module.scss";
 import Product from "../../components/Product/Product";
-import { useGetProductsQuery } from "../../services/api";
+import { useGetAllProductsQuery } from "../../services/api";
 
 // interface CatalogPageProps {}
 
 const CatalogPage = () => {
-  const { data = [], isLoading } = useGetProductsQuery([]);
+  const { data = [], isLoading } = useGetAllProductsQuery([]);
   if (isLoading) return <div>Loading...</div>;
 
   return (
