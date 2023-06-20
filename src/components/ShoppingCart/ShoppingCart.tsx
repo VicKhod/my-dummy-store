@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./ShoppingCart.module.scss";
 import { useGetAllCartsQuery } from "../../services/api";
+import ProductCard from "./ProductCard";
 
 export interface ICartProduct {
   id: number;
@@ -13,7 +14,7 @@ export interface ICartProduct {
 }
 export interface ICart {
   id: number;
-  products: ICartProduct;
+  products: ICartProduct[];
   total: number;
   discountedTotal: number;
   userId: number;
@@ -40,8 +41,14 @@ const ShoppingCart = () => {
           <div>
             {Object.keys(data?.carts).map((key, index) => {
               return (
-                <div className={styles.catalogPage__item} key={key}>
-                  <div>{data.carts[index].total}</div>
+                <div key={key}>
+                  <h2>user {data.carts[index].userId} Shopping Cart</h2>
+                  <div>Всего {data.carts[index].total}</div>
+                  <div>
+                    {data.carts[index].products.map((product) => (
+                      <ProductCard key={product.id} product={{...product}}/>
+                    ))}
+                  </div>
                 </div>
               );
             })}
