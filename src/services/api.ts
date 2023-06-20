@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ILoginRequest, IUser } from "../store/slices/userSlice";
 import { IProduct } from "../store/slices/productSlice";
+import { IAllCarts } from "../components/ShoppingCart/ShoppingCart";
 
 export const API = createApi({
   reducerPath: "API",
@@ -29,7 +30,9 @@ export const API = createApi({
         body: { username, password },
       }),
     }),
-   
+    getAllCarts: build.query<IAllCarts, void>({
+      query: () => "/carts",
+    }),
   }),
 });
 
@@ -38,4 +41,5 @@ export const {
   useGetProductQuery,
   useSearchProductsQuery,
   useLoginMutation,
+  useGetAllCartsQuery,
 } = API;
