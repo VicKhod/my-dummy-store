@@ -7,7 +7,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import Auth from "./hoc/Auth";
 import UserPage from "./pages/UserPage/UserPage";
 import ProductPage from "./pages/ProductPage/ProductPage";
-import Search from "./components/Search/Search";
+// import Search from "./components/Search/Search";
 import ShoppingCart from "./components/ShoppingCart/ShoppingCart";
 
 function App() {
