@@ -30,7 +30,7 @@ const Search = ({}: SearchProps) => {
   return (
     <div className={styles.search}>
       <form>
-        <input type="text" placeholder="Поиск" />
+        <input type="text" placeholder="Поиск" ref={(input) => updateVal(input?.value)}/>
         <button className="search-btn" type="button">
           <img src={icon} />
         </button>
