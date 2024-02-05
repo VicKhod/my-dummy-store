@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 import styles from './Header.module.scss';
 import Search from '../Search/Search';
 
-interface HeaderProps {}
+// interface HeaderProps {}
 
-const Header = ({}: HeaderProps) => (
+const Header = () => (
   <div className={styles.header}>
     <header>
       <nav>
