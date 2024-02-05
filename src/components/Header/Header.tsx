@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import styles from './Header.module.scss';
 import Search from '../Search/Search';
+import iconCart from "../../assets/img/cart.png"
 
 // interface HeaderProps {}
 
@@ -11,7 +12,7 @@ const Header = () => (
         <Link to='/'>Главная</Link>
         <Link to='/catalog'>Каталог</Link>
         <Search/>
-        <Link to='/cart'>Корзина</Link>
+        <Link to='/cart'><img src={iconCart} alt="cart" /></Link>
         <Link to='/user'>Личный кабинет</Link>
       </nav>
 
