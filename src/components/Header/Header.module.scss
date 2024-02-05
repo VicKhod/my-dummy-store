@@ -2,18 +2,24 @@
   padding: 26px 120px;
 }
 
-nav ul {
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+ul {
   list-style: none;
   padding: 0;
   margin: 0;
-}
-
-nav ul li {
+  
+  li {
   display: inline-block;
   margin-right: 10px;
-}
 
-nav ul li a {
-  text-decoration: none;
-  color: #333;
+  a {
+    text-decoration: none;
+    color: #333;
+  }
+}
+}
 }

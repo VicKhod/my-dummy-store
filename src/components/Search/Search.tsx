@@ -1,7 +1,7 @@
 import React, { HTMLInputTypeAttribute, InputHTMLAttributes, useState } from "react";
 import styles from "./Search.module.scss";
 import icon from "../../assets/img/search.png";
-import { FormatInputPathObject } from "path";
+// import { FormatInputPathObject } from "path";
 
 interface SearchProps {}
 
