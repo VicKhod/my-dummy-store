@@ -1,6 +1,4 @@
-import React from "react";
 import styles from "./HomePage.module.scss";
-import { title } from "process";
 
 // interface HomePageProps {}
 
