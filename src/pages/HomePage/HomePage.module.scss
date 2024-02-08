@@ -13,3 +13,23 @@
   background-position: 100%;
   background-size: cover;
 }
+
+.banner__text_title {
+  font-family: 'Jost';
+  width: 645px;
+  font-size: 55px;
+  padding-top: 198px;
+  text-align: center;
+  display: block;
+  margin: auto;
+}
+
+.banner__text {
+  text-align: center;
+}
+
+button {
+  display: block;
+  margin: auto;
+  //margin-right: auto;
+}
