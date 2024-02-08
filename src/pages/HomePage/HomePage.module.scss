@@ -4,3 +4,9 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
+.banner {
+  height: 600px;
+  width: 1440px;
+  background: center / contain no-repeat url(../../assets/img/background_home_page.png);
+}

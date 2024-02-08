@@ -6,11 +6,11 @@ import bcgImg from "../../assets/img/background_home_page.png"
 
 const HomePage = () => {
   return (
-    <>
-      <div>
-        <img src={bcgImg} alt='banner_image'/>
-        <div>Offer products to make your interior Minimalist.</div>
-        <div>we have helped more than 1000+ people to give perfect comfort to the interior of their home</div>
+    <div className={styles.homePage}>
+      <div className={styles.banner}>
+        {/* <img src={bcgImg} alt='banner_image'/> */}
+        <div className={styles.banner__text_title}>Offer products to make your interior Minimalist.</div>
+        <div className={styles.banner__text}>we have helped more than 1000+ people to give perfect comfort to the interior of their home</div>
         <button>Find Product</button>
       </div>
       <div>
@@ -35,7 +35,7 @@ const HomePage = () => {
                 <div className="circle"></div>
               </div>
       </div>
-    </>
+    </div>
   );
 };
 
