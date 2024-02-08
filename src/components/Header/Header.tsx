@@ -9,11 +9,12 @@ const Header = () => (
   <div className={styles.header}>
     <header>
       <nav>
-        <Link to='/'>Главная</Link>
-        <Link to='/catalog'>Каталог</Link>
+        <Link to='/'>Home</Link>
+        <Link to='/catalog'>Catalog</Link>
+        <Link to='/user'>Profile</Link>
         <Search/>
         <Link to='/cart'><img src={iconCart} alt="cart" /></Link>
-        <Link to='/user'>Личный кабинет</Link>
+        
       </nav>
 
     </header>
