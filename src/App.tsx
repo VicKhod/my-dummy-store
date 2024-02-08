@@ -26,9 +26,9 @@ function App() {
         <Route
           index
           element={
-            <Auth>
+            // <Auth>
               <HomePage />
-            </Auth>
+            // </Auth>
           }
         />
         <Route
