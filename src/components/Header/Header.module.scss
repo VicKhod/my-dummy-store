@@ -9,15 +9,21 @@
 
 nav {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   width: 1200px;
   margin: auto;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 .header__nav_links {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  padding-top: 3px;
   gap: 50px;
+}
+.header__nav_icons {
+  gap: 36px;
 }
