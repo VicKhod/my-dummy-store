@@ -1,6 +1,6 @@
 import React, { HTMLInputTypeAttribute, InputHTMLAttributes, useState } from "react";
 import styles from "./Search.module.scss";
-import icon from "../../assets/img/search.png";
+import icon from "../../assets/img/search.svg";
 // import { FormatInputPathObject } from "path";
 
 interface SearchProps {}
@@ -31,7 +31,7 @@ const Search = ({}: SearchProps) => {
     <div className={styles.search}>
       <form>
         {/* <input type="text" placeholder="Поиск" ref={(input) => updateVal(input?.value)}/> */}
-        <button className="search-btn" type="button">
+        <button className={styles.search__btn} type="button">
           <img src={icon} alt="search"/>
         </button>
       </form>
