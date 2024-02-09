@@ -14,3 +14,10 @@ nav {
   width: 1200px;
   margin: auto;
 }
+
+.header__nav_links {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+}
