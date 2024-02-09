@@ -3,26 +3,14 @@
   z-index: 10;
   padding: 26px 120px;
   background-color: transparent;
+  font-family: "Jost";
+  font-size: 14px;
 }
 
 nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  
-    li {
-    display: inline-block;
-    margin-right: 10px;
-
-      a {
-      text-decoration: none;
-      color: #333;
-      }
-    }
-  }
+  width: 1200px;
+  margin: auto;
 }
