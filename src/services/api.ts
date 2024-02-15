@@ -23,6 +23,12 @@ export const API = createApi({
     searchProducts: build.query({
       query: (search: string) => `/products/search?q=${search}`,
     }),
+    getAllCategories: build.query<IAllCarts, void>({
+      query: () => "/products/categories",
+    }),
+    getCategory: build.query<IAllCarts, string>({
+      query: (name: string) => `/products/categories/${name}`,
+    }),
     login: build.mutation<IUser, ILoginRequest>({
       query: ({ username, password }) => ({
         url: "/auth/login",
@@ -33,6 +39,7 @@ export const API = createApi({
     getAllCarts: build.query<IAllCarts, void>({
       query: () => "/carts",
     }),
+    
   }),
 });
 
