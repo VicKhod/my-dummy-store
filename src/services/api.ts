@@ -49,4 +49,6 @@ export const {
   useSearchProductsQuery,
   useLoginMutation,
   useGetAllCartsQuery,
+  useGetAllCategoriesQuery,
+  useGetCategoryQuery,
 } = API;
