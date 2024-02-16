@@ -1,24 +1,33 @@
-import { Link } from "react-router-dom";
 import {
   useGetAllCategoriesQuery,
   useGetCategoryQuery,
 } from "../../services/api";
 import styles from "./HomePage.module.scss";
-import Product from "../../components/Product/Product";
 
-export interface ICategory {
-  id: number;
-  title: string;
-  price: number;
-  quantity: number;
-  total: number;
-  discountPercentage: number;
-  discountedPrice: number;
+export interface ICategory  {
+  products: Product[]
+  total: number
+  skip: number
+  limit: number
+}
+
+export interface Product {
+  id: number
+  title: string
+  description: string
+  price: number
+  discountPercentage: number
+  rating: number
+  stock: number
+  brand: string
+  category: string
+  thumbnail: string
+  images: string[]
 }
 // interface HomePageProps {}
 
 const HomePage = () => {
-  const { data = [], isLoading } = useGetAllCategoriesQuery();
+  const { data = [], isLoading } = useGetCategoryQuery('smartphones');
   if (isLoading) return <div>Loading...</div>;
 
   return (

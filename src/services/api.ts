@@ -28,7 +28,7 @@ export const API = createApi({
       query: () => "/products/categories",
     }),
     getCategory: build.query<ICategory, string>({
-      query: (name: string) => `/products/categories/${name}`,
+      query: (name: string) => `/products/category/${name}`,
     }),
     login: build.mutation<IUser, ILoginRequest>({
       query: ({ username, password }) => ({
