@@ -15,10 +15,6 @@ export interface ICategory {
   discountPercentage: number;
   discountedPrice: number;
 }
-export interface IAllCategories {
-  categories: string[];
-}
-
 // interface HomePageProps {}
 
 const HomePage = () => {
