@@ -34,25 +34,25 @@ function App() {
         <Route
           path="catalog"
           element={
-            <Auth>
+            // <Auth>
               <CatalogPage />
-            </Auth>
+            // </Auth>
           }
         />
         <Route
           path="/product/:id"
           element={
-            <Auth>
+            // <Auth>
               <ProductPage />
-            </Auth>
+            // </Auth>
           }
         />
         <Route
           path="/cart"
           element={
-            <Auth>
+            // <Auth>
               <ShoppingCart/>
-            </Auth>
+            // </Auth>
           }
         />
       </Route>
