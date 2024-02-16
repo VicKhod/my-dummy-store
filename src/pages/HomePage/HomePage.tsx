@@ -1,36 +1,24 @@
+import { Link } from "react-router-dom";
+import Product from "../../components/Product/Product";
 import {
-  useGetAllCategoriesQuery,
   useGetCategoryQuery,
 } from "../../services/api";
+import { IProduct } from "../../store/slices/productSlice";
 import styles from "./HomePage.module.scss";
 
-export interface ICategory  {
-  products: Product[]
+export interface ICategory {
+  products: IProduct[]
   total: number
   skip: number
   limit: number
 }
 
-export interface Product {
-  id: number
-  title: string
-  description: string
-  price: number
-  discountPercentage: number
-  rating: number
-  stock: number
-  brand: string
-  category: string
-  thumbnail: string
-  images: string[]
-}
-// interface HomePageProps {}
-
 const HomePage = () => {
-  const { data = [], isLoading } = useGetCategoryQuery('smartphones');
+  const { data, isLoading } = useGetCategoryQuery('furniture');
+  console.log(data)
   if (isLoading) return <div>Loading...</div>;
 
-  return (
+ return (
     <div className={styles.homePage}>
       <div className={styles.banner}>
         <div className={styles.banner__text}>
@@ -44,9 +32,7 @@ const HomePage = () => {
           <button>Find Product</button>
         </div>
       </div>
-      <div className={styles.carousel}>
-        
-      </div>
+      <div className={styles.carousel}></div>
       <div>
         <div>
           <div className="circle another-color"></div>
