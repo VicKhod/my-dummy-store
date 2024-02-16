@@ -1,17 +1,28 @@
 .productWrapper {
   width: 48%;
   background-color: beige;
-  border-radius: 5%;
-  box-shadow: 12px 12px 2px 1px rgba(0, 0, 255, .2);
+  border-radius: 2.5%;
+  box-shadow: 0px 2px 5px rgb(116, 116, 116);
 }
+
 .productImg {
   height: 120px;
   background-color: lightgray;
 }
-.productTitle{
 
+.productDescription {
+  display: gap;
+  color: black;
 }
+
+.productCat {
+  font-size: 14px;
+  color: gray;
+}
+
 .productPrice {
-  font-weight: bold;
-  font-size: 1.2em;
+  font-size: 14px;
+  font-weight: 600;
+  margin: auto;
+  color: rgb(13 19 111);
 }
