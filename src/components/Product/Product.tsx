@@ -3,12 +3,7 @@ import { IProduct } from "../../store/slices/productSlice";
 
 const Product: React.FC<{ product: IProduct }> = ({ product }) => {
   const productImg = {
-    backgroundImage: `url(${product.images[0]})`,
-    backgroundSize: "contain",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-    backgroundColor: "#fff",
-    marginBottom: "20px",
+    backgroundImage: `url(${product.images[0]})`
   };
 
   return (
