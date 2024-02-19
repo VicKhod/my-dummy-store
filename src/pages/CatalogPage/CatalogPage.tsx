@@ -12,17 +12,15 @@ const CatalogPage = () => {
 
   return (
     <div className={styles.catalogPage}>
-      <div>
-        {Object.keys(data.products).map((key, index) => {
-          return (
-            <div className={styles.catalogPage__item} key={index}>
-              <Link to={`/product/${index}`} key={key}>
-                <Product product={data.products[key]} /> 
-              </Link>
-            </div>
-          );
-        })}
-      </div>
+      {Object.keys(data.products).map((key, index) => {
+        return (
+          <div className={styles.catalogPage__item} key={index}>
+            <Link to={`/product/${index}`} key={key}>
+              <Product product={data.products[key]} />
+            </Link>
+          </div>
+        );
+      })}
     </div>
   );
 };

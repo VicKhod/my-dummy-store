@@ -1,9 +1,0 @@
-.catalogPage__item {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-.catalogPage__item > * {
-  width: calc(25% - 40px); 
-  margin-bottom: 40px;
-}
