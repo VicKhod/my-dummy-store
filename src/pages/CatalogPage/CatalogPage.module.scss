@@ -1,0 +1,12 @@
+.catalogPage {
+  padding: 15px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1em;
+  justify-items: center;
+}
+
+.catalogPage__item {
+  display: block;
+  width: fit-content;
+}
